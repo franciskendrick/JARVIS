@@ -49,6 +49,10 @@ class School(commands.Cog):
         with open(f"{resources_path}/responses.json") as json_file:
             self.responses = json.load(json_file)
 
+        # Errors
+        with open(f"{resources_path}/errors.json") as json_file:
+            self.errors = json.load(json_file)
+
     # Commands
     @commands.command()
     async def sched(self, ctx, given_day=None):
@@ -71,7 +75,10 @@ class School(commands.Cog):
 
         # Check for errors
         if day == None:  # error
-            pass  # !!!
+            message = random.choice(self.errors["WrongArgumentGiven"])
+            message = message.replace("__user__", f"<@{ctx.author.id}>")
+
+            await ctx.send(message)
         else:  # give schedule
             if day in self.days["synchronous"]:
                 embed = self.get_schedule_embed(day)
