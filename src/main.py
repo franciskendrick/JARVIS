@@ -16,5 +16,13 @@ async def on_ready():
 if __name__ == "__main__":
     TOKEN = os.environ["TOKEN"]
 
+    # Path
+    path = os.path.dirname(__file__)
+
+    # Load cogs
+    for filename in os.listdir(f"{path}/cogs"):
+        if filename.endswith(".py"):  # a python file
+            bot.load_extension(f"cogs.{filename[:-3]}")
+
     # Run bot
     bot.run(TOKEN)
