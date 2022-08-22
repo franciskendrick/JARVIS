@@ -1,0 +1,55 @@
+{
+    "synchronous": {
+        "links": {
+            "Homeroom": "https://meet.google.com/ecj-jopz-nym",
+            "Filipino": "https://meet.google.com/ucb-tkid-sib",
+            "English": "https://meet.google.com/gxg-fehn-vtd",
+            "Mathematics": "https://meet.google.com/ghf-ooce-oaa",
+            "Science": "https://meet.google.com/pbo-qiqi-qsr",
+            "Araling Panlipunan": "https://meet.google.com/ecj-jopz-nym",
+            "ESP": "https://meet.google.com/nfo-fixa-gui",
+            "TLE": "https://meet.google.com/hwh-bsvj-zqq",
+            "MAPEH": "https://meet.google.com/inr-thtp-nax",
+            "Computer": "https://meet.google.com/hjz-gwwb-joc"
+        },
+        "schedule": {
+            "Monday": {
+                "07:30:00 - 08:00:00": "Homeroom",
+                "08:15:00 - 09:15:00": "Araling Panlipunan",
+                "09:30:00 - 10:30:00": "MAPEH",
+                "11:00:00 - 12:00:00": "Computer"
+            },
+            "Wednesday": {
+                "07:30:00 - 08:00:00": "Homeroom",
+                "08:15:00 - 09:15:00": "TLE",
+                "09:30:00 - 10:30:00": "Science",
+                "11:00:00 - 12:00:00": "ESP"
+            },
+            "Friday": {
+                "07:30:00 - 08:00:00": "Homeroom",
+                "08:15:00 - 09:15:00": "Mathematics",
+                "09:30:00 - 10:30:00": "Filipino",
+                "11:00:00 - 12:00:00": "English"
+            }
+        }
+    },
+    "asynchronous": {
+        "schedule": {
+            "Monday": {
+                "01:00:00 - 02:00:00": "Filipino", 
+                "02:15:00 - 03:15:00": "Araling Panlipunan",
+                "03:30:00 - 04:30:00": "MAPEH"
+            },
+            "Wednesday": {
+                "01:00:00 - 02:00:00": "Araling Panlipunan", 
+                "02:15:00 - 03:15:00": "Mathematics",
+                "03:30:00 - 04:30:00": "Filipino"
+            },
+            "Friday": {
+                "01:00:00 - 02:00:00": "Mathematics", 
+                "02:15:00 - 03:15:00": "English",
+                "03:30:00 - 04:30:00": "Club Meeting"
+            }
+        }
+    }
+}

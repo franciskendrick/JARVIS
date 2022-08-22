@@ -1,0 +1,15 @@
+{
+    "rest": {
+        "with_input": [
+            "That day's __day__! No classes whatsoever!:confetti_ball:",
+            "No synchronous classes for that day!:partying_face:",
+            "Hey __user__! That day's __day__, so no classes!:confetti_ball:"
+        ],
+        "no_input": [
+            "Today's __day__! No classes whatsoever!:confetti_ball:",
+            "I think you should get some rest, __user__! It's __day__!:laughing:",
+            "No synchronous classes for today!:partying_face:",
+            "Hey __user__! Today's __day__, so no classes!:confetti_ball:"
+        ]
+    }
+}
