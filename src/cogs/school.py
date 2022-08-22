@@ -1,4 +1,3 @@
-from operator import sub
 from utils import Colors
 from discord.ext import commands
 import discord
@@ -72,7 +71,7 @@ class School(commands.Cog):
 
         # Check for errors
         if day == None:  # error
-            pass
+            pass  # !!!
         else:  # give schedule
             if day in self.days["synchronous"]:
                 embed = self.get_schedule_embed(day)
@@ -84,7 +83,9 @@ class School(commands.Cog):
 
     @commands.command()
     async def fsched(self, ctx):
-        pass
+        for day in self.days["synchronous"]:
+            embed = self.get_schedule_embed(day)
+            await ctx.send(embed=embed)
 
     @commands.command()
     async def next(self, ctx):
