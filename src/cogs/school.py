@@ -1,6 +1,6 @@
-from time import strptime
-from turtle import title
 from utils import Colors
+from utils import format_time
+from utils import get_restday_message
 from discord.ext import commands
 import discord
 import json
@@ -82,7 +82,7 @@ class School(commands.Cog):
                 await ctx.send(embed=embed)
             else:
                 input_type = "with_input" if with_input else "no_input"
-                message = self.get_restday_message(ctx, day, input_type)
+                message = get_restday_message(ctx, day, input_type)
                 await ctx.send(message)
         else:  # give schedule
             message = random.choice(self.errors["WrongArgumentGiven"])
@@ -116,7 +116,7 @@ class School(commands.Cog):
                 message = message.replace("__user__", f"<@{ctx.author.id}>")
                 await ctx.send(message)
         else:
-            message = self.get_restday_message(ctx, current_day, "no_input")
+            message = get_restday_message(ctx, current_day, "no_input")
             await ctx.send(message)
 
     # Schedule functions
@@ -135,8 +135,8 @@ class School(commands.Cog):
             
             # Get time
             start_time, end_time = time.split(" - ")
-            start_time = self.get_standard_time(start_time)
-            end_time = self.get_standard_time(end_time)
+            start_time = format_time(start_time)
+            end_time = format_time(end_time)
 
             time = f"{start_time} - {end_time}"
 
@@ -148,15 +148,6 @@ class School(commands.Cog):
 
         # Return embed
         return embed
-
-    def get_restday_message(self, ctx, day, input_type):
-        # Get message
-        message = random.choice(self.responses["on_restday"][input_type])
-        message = message.replace("__user__", f"<@{ctx.author.id}>")
-        message = message.replace("__day__", day)
-
-        # Return message
-        return message
 
     # Next functions
     def get_nextclass_embed(self, message, day, time):
@@ -170,8 +161,8 @@ class School(commands.Cog):
 
         # Times
         start_time, end_time = time.split(" - ")
-        start_time = self.get_standard_time(start_time)
-        end_time = self.get_standard_time(end_time)
+        start_time = format_time(start_time)
+        end_time = format_time(end_time)
         time_limit = f"{start_time} - {end_time}"
 
         # Add Field
@@ -303,21 +294,6 @@ class School(commands.Cog):
     def convert_timestr_to_datetime(self, time):
         time = [int(t) for t in time.split(":")]
         return datetime.time(*time)
-
-    # Functions for all
-    def get_standard_time(self, time):
-        # Convert time into a datetime object
-        time = datetime.datetime.strptime(time, "%H:%M:%S")
-
-        # Get standard time
-        time = time.time()
-        standard_time = time.strftime("%I:%M")
-
-        # Get meridian
-        meridian = "PM" if time.hour >= 12 else "AM"
-
-        # Return
-        return f"{standard_time} {meridian}"
 
 
 # Setup
