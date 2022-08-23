@@ -1,6 +1,7 @@
 from utils import Colors
 from utils import format_time
 from utils import get_restday_message
+from utils import get_schedule_embed
 from discord.ext import commands
 import discord
 import json
@@ -26,16 +27,6 @@ class School(commands.Cog):
         self.days = {
             "synchronous": ["Monday", "Wednesday", "Friday"],
             "asynchronous": ["Tuesday", "Thursday", "Saturday"]
-        }
-
-        # Embed colors
-        self.colors = {
-            "Monday": Colors.red,
-            "Tuesday": Colors.red,
-            "Wednesday": Colors.yellow,
-            "Thursday": Colors.yellow,
-            "Friday": Colors.green,
-            "Saturday": Colors.green
         }
 
         # Aliases
@@ -78,7 +69,7 @@ class School(commands.Cog):
         # Give schedule
         if day != None:  # give schedule
             if day in self.days["synchronous"]:
-                embed = self.get_schedule_embed(day)
+                embed = get_schedule_embed(day)
                 await ctx.send(embed=embed)
             else:
                 input_type = "with_input" if with_input else "no_input"
@@ -93,7 +84,7 @@ class School(commands.Cog):
     @commands.command()
     async def fsched(self, ctx):
         for day in self.days["synchronous"]:
-            embed = self.get_schedule_embed(day)
+            embed = get_schedule_embed(day)
             await ctx.send(embed=embed)
 
     @commands.command()
@@ -118,36 +109,6 @@ class School(commands.Cog):
         else:
             message = get_restday_message(ctx, current_day, "no_input")
             await ctx.send(message)
-
-    # Schedule functions
-    def get_schedule_embed(self, day):
-        color = self.colors[day]
-        embed = discord.Embed(
-            title=f"{day}:",
-            color=discord.Color.from_rgb(*color))
-
-        # Write to embed
-        sched = self.synchronous_data["schedule"][day]
-        for time in sched:
-            # Get subjects and links
-            subject = sched[time]
-            link = self.synchronous_data["links"][subject]
-            
-            # Get time
-            start_time, end_time = time.split(" - ")
-            start_time = format_time(start_time)
-            end_time = format_time(end_time)
-
-            time = f"{start_time} - {end_time}"
-
-            # Add field
-            embed.add_field(
-                name=f"__{subject}__ {time}:",
-                value=link,
-                inline=False)
-
-        # Return embed
-        return embed
 
     # Next functions
     def get_nextclass_embed(self, message, day, time):
