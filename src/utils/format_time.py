@@ -1,7 +1,7 @@
 import datetime
 
 
-def format_time(time):
+def formattime_to_twelevehour(time):
     # Convert time into a datetime object
     time = datetime.datetime.strptime(time, "%H:%M:%S")
 
@@ -14,3 +14,22 @@ def format_time(time):
 
     # Return
     return f"{twelvehour_format} {meridian}"
+
+
+def convert_timestr_to_datetime(time):
+    time = [int(t) for t in time.split(":")]
+    return datetime.time(*time)
+
+
+def round_time(time):
+    # Get date
+    date = datetime.date.today()
+
+    # Get time
+    split_time = time.split(":")
+    time = f"{split_time[0]}:{split_time[1]}:00"
+    time = convert_timestr_to_datetime(time)
+
+    # Return
+    return datetime.datetime.combine(date, time)
+

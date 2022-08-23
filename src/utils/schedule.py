@@ -1,5 +1,5 @@
 from .colors import Colors
-from .format_time import format_time
+from .format_time import formattime_to_twelevehour
 import discord
 import json
 import os
@@ -42,8 +42,8 @@ def get_schedule_embed(day):
         
         # Get time
         start_time, end_time = time.split(" - ")
-        start_time = format_time(start_time)
-        end_time = format_time(end_time)
+        start_time = formattime_to_twelevehour(start_time)
+        end_time = formattime_to_twelevehour(end_time)
 
         time = f"{start_time} - {end_time}"
 
