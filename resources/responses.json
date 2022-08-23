@@ -1,5 +1,5 @@
 {
-    "rest": {
+    "on_restday": {
         "with_input": [
             "That day's __day__! No classes whatsoever!:confetti_ball:",
             "No synchronous classes for that day!:partying_face:",
@@ -11,5 +11,11 @@
             "No synchronous classes for today!:partying_face:",
             "Hey __user__! Today's __day__, so no classes!:confetti_ball:"
         ]
-    }
+    },
+    "class_finished": [
+        "Congratulations, __user__! You've finished your online classes!:partying_face:",
+        "There are no more synchronous classes for today __user__, take a rest!:relieved:",
+        "No more synchronous classes in your schedule! Beep boop.:robot:",
+        "I think online class is finished... and i fell asleep.:sleepy:"
+    ]
 }
