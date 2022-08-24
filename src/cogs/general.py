@@ -10,7 +10,7 @@ resources_path = os.path.abspath(
         "..", "..", "resources"
         )
     )
-    
+
 CREATOR_ID = os.environ['CREATOR_ID']
 
 
@@ -20,8 +20,10 @@ class General(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        pass
+        print("{0.user} has logged in.".format(self.bot))
+        await self.bot.change_presence(status=discord.Status.do_not_disturb)
 
+    @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         pass
 

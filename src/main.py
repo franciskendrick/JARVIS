@@ -8,11 +8,6 @@ bot = commands.Bot(
 )
 
 
-@bot.event
-async def on_ready():
-    await bot.change_presence(status=discord.Status.do_not_disturb)
-
-
 if __name__ == "__main__":
     TOKEN = os.environ["TOKEN"]
 
