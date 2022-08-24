@@ -4,11 +4,11 @@ from utils import get_schedule_embed
 from utils import get_nextclass_title
 from utils import get_nextclass_embed
 from discord.ext import commands
-import json
-import os
 import datetime
 import random
 import pytz
+import json
+import os
 
 resources_path = os.path.abspath(
     os.path.join(
