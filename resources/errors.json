@@ -1,7 +1,12 @@
 {
-    "WrongArgumentGiven": [
-        "Wrong argument given! :robot:",
-        "You've gave me the wrong argument/s, __user__!",
-        "I don't think that's the right parameter. :worried:"
+    "MissingRequiredArgument": [
+        "Missing required argument/s! Beep boop, beep boop.:robot:",
+        "You're missing a parameter!",
+        "__user__, i think you forgot to give me something.:worried:"
+    ],
+    "CommandNotFound": [
+        "I'm pretty sure that's not a command.:confused:",
+        "Beep boop! Command not found!:robot:",
+        "I can't find a command like that, __user__.:worried:"
     ]
 }
