@@ -6,6 +6,10 @@ from .format_time import formattime_to_twelevehour
 from .format_time import convert_timestr_to_datetime
 from .format_time import round_time
 
+# Help module/s
+from .help import get_fullhelp_embed
+from .help import get_commandinfo_embed
+
 # Schedule module/s
 from .schedule import get_schedule_embed
 
