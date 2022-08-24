@@ -5,8 +5,7 @@ import os
 bot = commands.Bot(
     command_prefix="~", 
     help_command=None,
-    intents=discord.Intents.all(),
-)
+    intents=discord.Intents.all())
 
 
 if __name__ == "__main__":
