@@ -4,6 +4,7 @@ import os
 
 bot = commands.Bot(
     command_prefix="~", 
+    help_command=None,
     intents=discord.Intents.all(),
 )
 

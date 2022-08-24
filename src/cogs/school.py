@@ -42,7 +42,11 @@ class School(commands.Cog):
             self.errors = json.load(json_file)
 
     # Commands
-    @commands.command()
+    @commands.command(
+        name="sched", 
+        usage="<given_day>",
+        description="Returns your schedule for today or for your given day.",
+        help="`<given_day>`: Returns the schedule of the given day (`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)")
     async def sched(self, ctx, given_day=None):
         # Get day
         if given_day == None:  # no argument given
@@ -76,13 +80,17 @@ class School(commands.Cog):
 
             await ctx.send(message)
 
-    @commands.command()
+    @commands.command(
+        name="fsched",
+        description="Returns your full schedule.")
     async def fsched(self, ctx):
         for day in self.days["synchronous"]:
             embed = get_schedule_embed(day)
             await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(
+        name="next",
+        description="Returns the next class you will be attending.")
     async def next(self, ctx):
         tz_manila = pytz.timezone("Asia/Manila")
         now = datetime.datetime.now(tz_manila)
