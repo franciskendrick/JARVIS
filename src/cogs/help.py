@@ -1,4 +1,3 @@
-from utils import Colors
 from utils import get_fullhelp_embed
 from utils import get_commandinfo_embed
 from discord.ext import commands

@@ -32,4 +32,3 @@ def round_time(time):
 
     # Return
     return datetime.datetime.combine(date, time)
-

@@ -1,3 +1,4 @@
+from .keep_alive import keep_alive
 from discord.ext import commands
 import discord
 import os
@@ -20,4 +21,5 @@ if __name__ == "__main__":
             bot.load_extension(f"cogs.{filename[:-3]}")
 
     # Run bot
+    keep_alive()
     bot.run(TOKEN)
