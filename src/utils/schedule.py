@@ -1,7 +1,8 @@
 from .colors import Colors
+from .get_env import get_synchronous_schedule
+from .get_env import get_links
 from .format_time import formattime_to_twelevehour
 import discord
-import json
 import os
 
 resources_path = os.path.abspath(
@@ -11,10 +12,9 @@ resources_path = os.path.abspath(
         )
     )
 
-# School JSON
-with open(f"{resources_path}/school.json") as json_file:
-    school = json.load(json_file)
-    synchronous_data = school["synchronous"]
+# Schedule and Links
+full_schedule = get_synchronous_schedule()
+links = get_links()
 
 # Embed colors
 embed_colors = {
@@ -34,11 +34,11 @@ def get_schedule_embed(day):
         color=discord.Color.from_rgb(*color))
 
     # Write to embed
-    sched = synchronous_data["schedule"][day]
+    sched = full_schedule[day]
     for time in sched:
         # Get subjects and links
         subject = sched[time]
-        link = synchronous_data["links"][subject]
+        link = links[subject]
         
         # Get time
         start_time, end_time = time.split(" - ")

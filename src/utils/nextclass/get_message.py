@@ -1,11 +1,12 @@
 from ..colors import Colors
+from ..get_env import get_synchronous_schedule
+from ..get_env import get_links
 from ..format_time import formattime_to_twelevehour
 from ..format_time import convert_timestr_to_datetime
 from ..format_time import round_time
 from .get_title import get_classstarted_title
 from .get_title import get_classnotstarted_title
 import discord
-import json
 import os
 
 resources_path = os.path.abspath(
@@ -15,14 +16,13 @@ resources_path = os.path.abspath(
         )
     )
 
-# School JSON
-with open(f"{resources_path}/school.json") as json_file:
-    school = json.load(json_file)
-    synchronous_data = school["synchronous"]
+# Schedule and Links
+full_schedule = get_synchronous_schedule()
+links = get_links()
 
 
 def get_nextclass_title(current_time):
-    for schedule in synchronous_data["schedule"].values():
+    for schedule in full_schedule.values():
         for time in schedule.keys():
             # Get start time and end time
             start_time, end_time = time.split(" - ")
@@ -69,8 +69,8 @@ def get_nextclass_embed(title, day, time):
         title=title, color=discord.Color.from_rgb(*Colors.pink))
 
     # Get subject and link
-    subject = synchronous_data["schedule"][day][time]
-    link = synchronous_data["links"][subject]
+    subject = full_schedule[day][time]
+    link = links[subject]
 
     # Times
     start_time, end_time = time.split(" - ")
