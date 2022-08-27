@@ -1,25 +1,29 @@
-from .keep_alive import keep_alive
+from keep_alive import keep_alive
 from discord.ext import commands
 import discord
+import asyncio
 import os
 
-bot = commands.Bot(
-    command_prefix="~", 
-    help_command=None,
-    intents=discord.Intents.all())
+
+async def load_cogs(bot):
+    for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):  # a python file
+            await bot.load_extension(f"cogs.{filename[:-3]}")
+
+
+async def main(bot, TOKEN):
+    async with bot:
+        await load_cogs(bot)
+        keep_alive()
+        await bot.start(TOKEN)
 
 
 if __name__ == "__main__":
+    bot = commands.Bot(
+        command_prefix="~", 
+        help_command=None,
+        intents=discord.Intents.all())
+
     TOKEN = os.environ["TOKEN"]
 
-    # Path
-    path = os.path.dirname(__file__)
-
-    # Load cogs
-    for filename in os.listdir(f"{path}/cogs"):
-        if filename.endswith(".py"):  # a python file
-            bot.load_extension(f"cogs.{filename[:-3]}")
-
-    # Run bot
-    keep_alive()
-    bot.run(TOKEN)
+    asyncio.run(main(bot, TOKEN))

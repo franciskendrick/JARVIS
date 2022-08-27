@@ -16,3 +16,7 @@ from .schedule import get_schedule_embed
 # Next class module/s
 from .nextclass import get_nextclass_title
 from .nextclass import get_nextclass_embed
+
+# Get env module/s
+from .get_env import get_links
+from .get_env import get_synchronous_schedule

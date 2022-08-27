@@ -1,4 +1,4 @@
-from utils import Colors
+from .colors import Colors
 import discord
 
 

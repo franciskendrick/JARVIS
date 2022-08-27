@@ -115,5 +115,5 @@ class School(commands.Cog):
 
 
 # Setup
-def setup(bot):
-    bot.add_cog(School(bot))
+async def setup(bot):
+    await bot.add_cog(School(bot))
