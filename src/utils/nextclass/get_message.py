@@ -6,7 +6,7 @@ from ..format_time import convert_timestr_to_datetime
 from ..format_time import round_time
 from .get_title import get_classstarted_title
 from .get_title import get_classnotstarted_title
-import discord
+import disnake as discord
 import os
 
 resources_path = os.path.abspath(

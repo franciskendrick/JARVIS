@@ -1,5 +1,5 @@
 from .colors import Colors
-import discord
+import disnake as discord
 
 
 def get_fullhelp_embed(ctx, bot):
@@ -10,7 +10,7 @@ def get_fullhelp_embed(ctx, bot):
     # Set author
     embed.set_author(
         name=ctx.me, 
-        icon_url=ctx.me.avatar_url)
+        icon_url=ctx.me.avatar.url)
 
     # Add description
     embed.description = "Use `~help [command]` to see more information about a command." 
@@ -39,7 +39,7 @@ def get_commandinfo_embed(ctx, bot, command_name):
     # Set author
     embed.set_author(
         name=ctx.me, 
-        icon_url=ctx.me.avatar_url)
+        icon_url=ctx.me.avatar.url)
 
     # Add how to use the command
     usage = command.usage

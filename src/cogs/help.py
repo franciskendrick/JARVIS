@@ -1,6 +1,6 @@
 from utils import get_fullhelp_embed
 from utils import get_commandinfo_embed
-from discord.ext import commands
+from disnake.ext import commands
 
 
 class Help(commands.Cog):

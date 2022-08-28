@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.0.2**: Updated README.md file.
+**Version: 2.1.0**: Used disnake package instead of discord.py package.
 
 <br>
 

@@ -1,6 +1,6 @@
 from keep_alive import keep_alive
 from discord.ext import commands
-import discord
+import disnake as discord
 import asyncio
 import os
 

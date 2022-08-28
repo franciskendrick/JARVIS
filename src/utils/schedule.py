@@ -2,7 +2,7 @@ from .colors import Colors
 from .get_env import get_synchronous_schedule
 from .get_env import get_links
 from .format_time import formattime_to_twelevehour
-import discord
+import disnake as discord
 import os
 
 resources_path = os.path.abspath(

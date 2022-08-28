@@ -1,5 +1,5 @@
-from discord.ext import commands
-import discord
+from disnake.ext import commands
+import disnake as discord
 import random
 import json
 import os
@@ -10,8 +10,6 @@ resources_path = os.path.abspath(
         "..", "..", "resources"
         )
     )
-
-CREATOR_ID = os.environ['CREATOR_ID']
 
 
 class General(commands.Cog):
@@ -39,7 +37,6 @@ class General(commands.Cog):
 
             # Replace message's key words
             message = message.replace("__user__", f"<@{ctx.author.id}>")
-            message = message.replace("__creator__", f"<@{CREATOR_ID}>")
 
             # Send
             await ctx.send(message)

@@ -3,7 +3,7 @@ from utils import get_restday_message
 from utils import get_schedule_embed
 from utils import get_nextclass_title
 from utils import get_nextclass_embed
-from discord.ext import commands
+from disnake.ext import commands
 import datetime
 import random
 import pytz
