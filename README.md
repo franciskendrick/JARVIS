@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.0.1**: Code is now repl.it compatible.
+**Version: 2.0.2**: Updated README.md file.
 
 <br>
 
@@ -22,6 +22,4 @@ This Discord bot tracks me and my friends' class schedules, online *(synchronous
 
 ## **How to Use:**
 - Follow the requirements written above.
-- Wait for slowmode timer to be over.
-- Do not set Discord as the top window.
 - Run _src/main.py_.
