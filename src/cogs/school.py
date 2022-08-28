@@ -42,11 +42,11 @@ class School(commands.Cog):
             self.errors = json.load(json_file)
 
     # Commands
-    @commands.command(
+    @commands.command( 
         name="sched", 
         usage="<given_day>",
         description="Returns your schedule for today or for your given day.",
-        help="`<given_day>`: Returns the schedule of the given day (`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)")
+        help="`<given_day>`: The day of the schedule you want to see. (`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)")
     async def sched(self, ctx, given_day=None):
         # Get day
         if given_day == None:  # no argument given
