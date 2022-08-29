@@ -16,13 +16,40 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # Normal command/s
     @commands.command(
         name="help",
-        usage="<command>",
+        usage="<command_name>",
         description="Show all the commands.",
-        help="`<command>`: The name of the command you want more information about."
+        help="`<command_name>`: The name of the command you want more information about."
     )
     async def help(self, ctx, command_name=None):
+        await self.handle_help(ctx, command_name)
+
+    # Slash command/s
+    @commands.slash_command(
+        name="help", 
+        description="Show all the commands.")
+    async def _help(
+        self,
+        inter: discord.AppCmdInter,
+        command_name = commands.Param(
+            default=None, 
+            name="command_name", 
+            autocomplete=autocomplete_commands)
+    ):
+        """
+        Show all the commands.
+
+        Parameters
+        ----------
+        command_name: The name of the command you want more information about.
+        """
+
+        await self.handle_help(inter, command_name)
+
+    # Handle command/s
+    async def handle_help(self, ctx, command_name):
         if command_name == None:  # send the full help message
             embed = get_fullhelp_embed(ctx, self.bot)
         else:  # send the infomation about the command given
@@ -30,23 +57,6 @@ class Help(commands.Cog):
 
         # Send
         await ctx.send(embed=embed)
-
-    @commands.slash_command(name="help")
-    async def _help(
-        self,
-        inter: discord.AppCmdInter,
-        command_name = commands.Param(
-            default=None, 
-            name="command", 
-            autocomplete=autocomplete_commands)
-    ):
-        if command_name == None:  # send the full help message
-            embed = get_fullhelp_embed(inter, self.bot)
-        else:  # send the infomation about the command given
-            embed = get_commandinfo_embed(inter, self.bot, command_name)
-
-        # Send
-        await inter.send(embed=embed)
 
 
 # Setup
