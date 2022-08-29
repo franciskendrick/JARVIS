@@ -60,27 +60,12 @@ class School(commands.Cog):
     @commands.command(
         name="next",
         description="Returns the next class you will be attending.")
-    async def next(self, ctx):
-        tz_manila = pytz.timezone("Asia/Manila")
-        now = datetime.datetime.now(tz_manila)
+    async def _next(self, ctx):
+        """
+        Returns the next class you will be attending.
+        """
 
-        # Get current day and time
-        current_day = now.strftime("%A")
-        current_time = round_time(now.strftime("%H:%M:%S"))
-
-        # Give next class
-        if current_day in self.days["synchronous"]:
-            title, time = get_nextclass_title(current_time)
-            if (title, time) != (None, None):  # class hasn't ended, hence, there's a class next
-                embed = get_nextclass_embed(title, current_day, time)
-                await ctx.send(embed=embed)
-            else:  # class has ended, hence, congratulate the student
-                message = random.choice(self.responses["class_finished"])
-                message = message.replace("__user__", f"<@{ctx.author.id}>")
-                await ctx.send(message)
-        else:
-            message = get_restday_message(ctx, current_day, "no_input")
-            await ctx.send(message)
+        await self.handle_next(ctx)
 
     # Slash command/s
     @commands.slash_command(name="sched")
@@ -117,6 +102,10 @@ class School(commands.Cog):
         """
 
         await self.handle_fsched(inter)
+
+    @commands.slash_command(name="next")
+    async def s_next(self, inter: discord.AppCmdInter):
+        await self.handle_next(inter)
 
     # Handle command/s
     async def handle_sched(self, ctx, given_day):
@@ -156,6 +145,28 @@ class School(commands.Cog):
         for day in self.days["synchronous"]:
             embed = get_schedule_embed(day)
             await ctx.send(embed=embed)
+
+    async def handle_next(self, ctx):
+        tz_manila = pytz.timezone("Asia/Manila")
+        now = datetime.datetime.now(tz_manila)
+
+        # Get current day and time
+        current_day = now.strftime("%A")
+        current_time = round_time(now.strftime("%H:%M:%S"))
+
+        # Give next class
+        if current_day in self.days["synchronous"]:
+            title, time = get_nextclass_title(current_time)
+            if (title, time) != (None, None):  # class hasn't ended, hence, there's a class next
+                embed = get_nextclass_embed(title, current_day, time)
+                await ctx.send(embed=embed)
+            else:  # class has ended, hence, congratulate the student
+                message = random.choice(self.responses["class_finished"])
+                message = message.replace("__user__", f"<@{ctx.author.id}>")
+                await ctx.send(message)
+        else:
+            message = get_restday_message(ctx, current_day, "no_input")
+            await ctx.send(message)
 
 
 # Setup
