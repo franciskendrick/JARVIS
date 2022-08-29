@@ -4,6 +4,7 @@ from utils import get_schedule_embed
 from utils import get_nextclass_title
 from utils import get_nextclass_embed
 from disnake.ext import commands
+import disnake as discord
 import datetime
 import random
 import pytz
@@ -41,13 +42,76 @@ class School(commands.Cog):
         with open(f"{resources_path}/errors.json") as json_file:
             self.errors = json.load(json_file)
 
-    # Commands
-    @commands.command( 
+    # Normal command/s
+    @commands.command(
         name="sched", 
         usage="<given_day>",
-        description="Returns your schedule for today or for your given day.",
+        description="Shows your schedule for today or for your given day.",
         help="`<given_day>`: The day of the schedule you want to see. (`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)")
     async def sched(self, ctx, given_day=None):
+        await self.handle_sched(ctx, given_day)
+
+    @commands.command(
+        name="fsched",
+        description="Returns your full schedule.")
+    async def fsched(self, ctx):
+        await self.fsched(ctx)
+
+    @commands.command(
+        name="next",
+        description="Returns the next class you will be attending.")
+    async def next(self, ctx):
+        tz_manila = pytz.timezone("Asia/Manila")
+        now = datetime.datetime.now(tz_manila)
+
+        # Get current day and time
+        current_day = now.strftime("%A")
+        current_time = round_time(now.strftime("%H:%M:%S"))
+
+        # Give next class
+        if current_day in self.days["synchronous"]:
+            title, time = get_nextclass_title(current_time)
+            if (title, time) != (None, None):  # class hasn't ended, hence, there's a class next
+                embed = get_nextclass_embed(title, current_day, time)
+                await ctx.send(embed=embed)
+            else:  # class has ended, hence, congratulate the student
+                message = random.choice(self.responses["class_finished"])
+                message = message.replace("__user__", f"<@{ctx.author.id}>")
+                await ctx.send(message)
+        else:
+            message = get_restday_message(ctx, current_day, "no_input")
+            await ctx.send(message)
+
+    # Slash command/s
+    @commands.slash_command(name="sched")
+    async def _sched(
+        self,
+        inter: discord.AppCmdInter,
+        given_day: str = commands.Param(
+            default=None, 
+            choices=[
+                "sunday", 
+                "monday", 
+                "tuesday", 
+                "wednesday", 
+                "thursday", 
+                "friday", 
+                "saturday"
+            ]
+        )
+    ):
+        """
+        Shows your schedule for today or for your given day.
+
+        Parameters
+        ----------
+        given_day: The day of the schedule you want to see.
+        """
+
+        await self.handle_sched(inter, given_day)
+
+    # Handle command/s
+    async def handle_sched(self, ctx, given_day):
         # Get day
         if given_day == None:  # no argument given
             with_input = False
@@ -78,39 +142,6 @@ class School(commands.Cog):
             message = random.choice(self.errors["WrongArgumentGiven"])
             message = message.replace("__user__", f"<@{ctx.author.id}>")
 
-            await ctx.send(message)
-
-    @commands.command(
-        name="fsched",
-        description="Returns your full schedule.")
-    async def fsched(self, ctx):
-        for day in self.days["synchronous"]:
-            embed = get_schedule_embed(day)
-            await ctx.send(embed=embed)
-
-    @commands.command(
-        name="next",
-        description="Returns the next class you will be attending.")
-    async def next(self, ctx):
-        tz_manila = pytz.timezone("Asia/Manila")
-        now = datetime.datetime.now(tz_manila)
-
-        # Get current day and time
-        current_day = now.strftime("%A")
-        current_time = round_time(now.strftime("%H:%M:%S"))
-
-        # Give next class
-        if current_day in self.days["synchronous"]:
-            title, time = get_nextclass_title(current_time)
-            if (title, time) != (None, None):  # class hasn't ended, hence, there's a class next
-                embed = get_nextclass_embed(title, current_day, time)
-                await ctx.send(embed=embed)
-            else:  # class has ended, hence, congratulate the student
-                message = random.choice(self.responses["class_finished"])
-                message = message.replace("__user__", f"<@{ctx.author.id}>")
-                await ctx.send(message)
-        else:
-            message = get_restday_message(ctx, current_day, "no_input")
             await ctx.send(message)
 
 
