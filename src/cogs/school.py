@@ -110,6 +110,14 @@ class School(commands.Cog):
 
         await self.handle_sched(inter, given_day)
 
+    @commands.slash_command(name="fsched")
+    async def _fsched(self, inter: discord.AppCmdInter):
+        """
+        Returns your full schedule.
+        """
+
+        await self.handle_fsched(inter)
+
     # Handle command/s
     async def handle_sched(self, ctx, given_day):
         # Get day
@@ -143,6 +151,11 @@ class School(commands.Cog):
             message = message.replace("__user__", f"<@{ctx.author.id}>")
 
             await ctx.send(message)
+
+    async def handle_fsched(self, ctx):
+        for day in self.days["synchronous"]:
+            embed = get_schedule_embed(day)
+            await ctx.send(embed=embed)
 
 
 # Setup
