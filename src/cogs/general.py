@@ -42,5 +42,5 @@ class General(commands.Cog):
             await ctx.send(message)
 
 
-async def setup(bot):
-    await bot.add_cog(General(bot))
+def setup(bot):
+    bot.add_cog(General(bot))

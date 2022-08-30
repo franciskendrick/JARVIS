@@ -1,5 +1,7 @@
 # **JARVIS**
-**Version: 2.2.0**: Added slash commands.
+**Version: 2.2.1**:
+- Fixed some bugs.
+- Added next slash command's description.
 
 <br>
 

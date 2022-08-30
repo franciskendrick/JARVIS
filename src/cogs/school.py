@@ -53,18 +53,14 @@ class School(commands.Cog):
 
     @commands.command(
         name="fsched",
-        description="Returns your full schedule.")
+        description="Shows your full schedule.")
     async def fsched(self, ctx):
         await self.fsched(ctx)
 
     @commands.command(
         name="next",
-        description="Returns the next class you will be attending.")
+        description="Shows the next class you will be attending.")
     async def _next(self, ctx):
-        """
-        Returns the next class you will be attending.
-        """
-
         await self.handle_next(ctx)
 
     # Slash command/s
@@ -98,13 +94,17 @@ class School(commands.Cog):
     @commands.slash_command(name="fsched")
     async def _fsched(self, inter: disnake.AppCmdInter):
         """
-        Returns your full schedule.
+        Shows your full schedule.
         """
 
         await self.handle_fsched(inter)
 
     @commands.slash_command(name="next")
     async def s_next(self, inter: disnake.AppCmdInter):
+        """
+        Shows the next class you will be attending.
+        """
+        
         await self.handle_next(inter)
 
     # Handle command/s
@@ -170,5 +170,5 @@ class School(commands.Cog):
 
 
 # Setup
-async def setup(bot):
-    await bot.add_cog(School(bot))
+def setup(bot):
+    bot.add_cog(School(bot))
