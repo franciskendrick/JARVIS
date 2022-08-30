@@ -2,7 +2,7 @@ from .colors import Colors
 from .get_env import get_synchronous_schedule
 from .get_env import get_links
 from .format_time import formattime_to_twelevehour
-import disnake as discord
+import disnake
 import os
 
 resources_path = os.path.abspath(
@@ -29,9 +29,9 @@ embed_colors = {
 
 def get_schedule_embed(day):
     color = embed_colors[day]
-    embed = discord.Embed(
+    embed = disnake.Embed(
         title=f"{day}:",
-        color=discord.Color.from_rgb(*color))
+        color=disnake.Color.from_rgb(*color))
 
     # Write to embed
     sched = full_schedule[day]

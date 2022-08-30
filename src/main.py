@@ -1,6 +1,6 @@
 from keep_alive import keep_alive
-from discord.ext import commands
-import disnake as discord
+from disnake.ext import commands
+import disnake
 import asyncio
 import os
 
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     bot = commands.Bot(
         command_prefix="~", 
         help_command=None,
-        intents=discord.Intents.all())
+        intents=disnake.Intents.all())
 
     TOKEN = os.environ["TOKEN"]
 

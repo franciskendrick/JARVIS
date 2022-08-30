@@ -1,5 +1,5 @@
 from disnake.ext import commands
-import disnake as discord
+import disnake
 import random
 import json
 import os
@@ -23,7 +23,7 @@ class General(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("{0.user} has logged in.".format(self.bot))
-        await self.bot.change_presence(status=discord.Status.do_not_disturb)
+        await self.bot.change_presence(status=disnake.Status.do_not_disturb)
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):

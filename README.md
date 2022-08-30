@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.1.0**: Used disnake package instead of discord.py package.
+**Version: 2.2.0**: Added slash commands.
 
 <br>
 

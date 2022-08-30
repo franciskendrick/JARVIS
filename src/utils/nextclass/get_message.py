@@ -6,7 +6,7 @@ from ..format_time import convert_timestr_to_datetime
 from ..format_time import round_time
 from .get_title import get_classstarted_title
 from .get_title import get_classnotstarted_title
-import disnake as discord
+import disnake
 import os
 
 resources_path = os.path.abspath(
@@ -65,8 +65,8 @@ def get_nextclass_title(current_time):
 
 def get_nextclass_embed(title, day, time):
     # Get embed
-    embed = discord.Embed(
-        title=title, color=discord.Color.from_rgb(*Colors.pink))
+    embed = disnake.Embed(
+        title=title, color=disnake.Color.from_rgb(*Colors.pink))
 
     # Get subject and link
     subject = full_schedule[day][time]

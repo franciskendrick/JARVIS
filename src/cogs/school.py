@@ -4,7 +4,7 @@ from utils import get_schedule_embed
 from utils import get_nextclass_title
 from utils import get_nextclass_embed
 from disnake.ext import commands
-import disnake as discord
+import disnake
 import datetime
 import random
 import pytz
@@ -71,7 +71,7 @@ class School(commands.Cog):
     @commands.slash_command(name="sched")
     async def _sched(
         self,
-        inter: discord.AppCmdInter,
+        inter: disnake.AppCmdInter,
         given_day: str = commands.Param(
             default=None, 
             choices=[
@@ -96,7 +96,7 @@ class School(commands.Cog):
         await self.handle_sched(inter, given_day)
 
     @commands.slash_command(name="fsched")
-    async def _fsched(self, inter: discord.AppCmdInter):
+    async def _fsched(self, inter: disnake.AppCmdInter):
         """
         Returns your full schedule.
         """
@@ -104,7 +104,7 @@ class School(commands.Cog):
         await self.handle_fsched(inter)
 
     @commands.slash_command(name="next")
-    async def s_next(self, inter: discord.AppCmdInter):
+    async def s_next(self, inter: disnake.AppCmdInter):
         await self.handle_next(inter)
 
     # Handle command/s

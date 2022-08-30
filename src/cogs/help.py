@@ -1,10 +1,10 @@
 from utils import get_fullhelp_embed
 from utils import get_commandinfo_embed
 from disnake.ext import commands
-import disnake as discord
+import disnake
 
 
-async def autocomplete_commands(inter: discord.AppCmdInter, user_input: str):
+async def autocomplete_commands(inter: disnake.AppCmdInter, user_input: str):
     commands = []
     for cmd in inter.bot.all_slash_commands.values():
         commands.append(cmd.name)
@@ -32,7 +32,7 @@ class Help(commands.Cog):
         description="Show all the commands.")
     async def _help(
         self,
-        inter: discord.AppCmdInter,
+        inter: disnake.AppCmdInter,
         command_name = commands.Param(
             default=None, 
             name="command_name", 

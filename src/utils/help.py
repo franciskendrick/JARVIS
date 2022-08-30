@@ -1,11 +1,11 @@
 from .colors import Colors
-import disnake as discord
+import disnake
 
 
 def get_fullhelp_embed(ctx, bot):
-    embed = discord.Embed(
+    embed = disnake.Embed(
         title="**Help Command**",
-        color=discord.Color.from_rgb(*Colors.light_brown))
+        color=disnake.Color.from_rgb(*Colors.light_brown))
     
     # Set author
     embed.set_author(
@@ -32,9 +32,9 @@ def get_fullhelp_embed(ctx, bot):
 
 def get_commandinfo_embed(ctx, bot, command_name):
     command = bot.all_commands.get(command_name)
-    embed = discord.Embed(
+    embed = disnake.Embed(
         title=f"**Command __{command_name}__**",
-        color=discord.Color.from_rgb(*Colors.light_brown))
+        color=disnake.Color.from_rgb(*Colors.light_brown))
 
     # Set author
     embed.set_author(
