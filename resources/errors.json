@@ -8,5 +8,10 @@
         "I'm pretty sure that's not a command.:confused:",
         "Beep boop! Command not found!:robot:",
         "I can't find a command like that, __user__.:worried:"
+    ],
+    "WrongArgumentGiven": [
+        "Wrong argument/s given! Beep boop.:robot:",
+        "You've got some argument/s wrong!",
+        "__user__, you gave me the wrong argument/s.:worried:"
     ]
 }

@@ -46,8 +46,8 @@ class School(commands.Cog):
         usage="<day> <learning_type>",
         description="Shows your schedule for today or for your given day.",
         help="""
-            `<day>`: The day of the schedule you want to see. (`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)
-            `<learning_type>`: The learning type of the schedule you want to see. (`synchronous` / `asynchronous` / `all`)
+            `<day>`: The day of the schedule you want to see. *(`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)*
+            `<learning_type>`: The learning type of the schedule you want to see. *(`synchronous` / `asynchronous` / `all`)*
         """
     )
     async def sched(self, ctx, day=None, learning_type=None):
@@ -55,9 +55,11 @@ class School(commands.Cog):
 
     @commands.command(
         name="fsched",
-        description="Shows your full schedule.")
-    async def fsched(self, ctx):
-        await self.fsched(ctx)
+        description="Shows your full schedule.",
+        help="`<learning_type>`: The learning type of the full schedule you want to see. *(`synchronous` / `asynchronous` / `all`)*"
+    )
+    async def fsched(self, ctx, learning_type="synchronous"):
+        await self.handle_fsched(ctx, learning_type)
 
     @commands.command(
         name="next",
@@ -103,12 +105,27 @@ class School(commands.Cog):
         await self.handle_sched(inter, day, learning_type)
 
     @commands.slash_command(name="fsched")
-    async def _fsched(self, inter: disnake.AppCmdInter):
+    async def _fsched(
+        self, 
+        inter: disnake.AppCmdInter,
+        learning_type: str = commands.Param(
+            default="synchronous",
+            choices=[
+                "synchronous",
+                "asynchronous",
+                "all"
+            ]
+        )
+    ):
         """
         Shows your full schedule.
+
+        Parameters
+        ----------
+        learning_type: The learning type of the full schedule you want to see.
         """
 
-        await self.handle_fsched(inter)
+        await self.handle_fsched(inter, learning_type)
 
     @commands.slash_command(name="next")
     async def s_next(self, inter: disnake.AppCmdInter):
@@ -122,10 +139,10 @@ class School(commands.Cog):
     async def handle_sched(self, ctx, given_day, given_learningtype):
         # Get variables
         day, with_input = get_day(given_day)
-        learning_type = get_learningtype(given_learningtype )
+        learning_type = get_learningtype(given_learningtype)
 
         # Give schedule
-        if day != None:  # get schedule
+        if day != None and learning_type != None:  # get schedule
             if day in self.days["online"]:  # give schedule
                 if learning_type == "all":  # give all schedules
                     for new_learningtype in ["synchronous", "asynchronous"]:
@@ -143,10 +160,15 @@ class School(commands.Cog):
             message = message.replace("__user__", f"<@{ctx.author.id}>")
             await ctx.send(message)
 
-    async def handle_fsched(self, ctx):
+    async def handle_fsched(self, ctx, given_learningtype):
         for day in self.days["online"]:
-            embed = get_schedule_embed(day)
-            await ctx.send(embed=embed)
+            if given_learningtype == "all":  # give all schedules
+                for learning_type in ["synchronous", "asynchronous"]:
+                    embed = get_schedule_embed(day, learning_type)
+                    await ctx.send(embed=embed)
+            else:  # give a/synchronous schedule
+                embed = get_schedule_embed(day, given_learningtype)
+                await ctx.send(embed=embed)
 
     async def handle_next(self, ctx):
         tz_manila = pytz.timezone("Asia/Manila")

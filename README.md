@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.3.0**: Added sched command's learning type variable
+**Version: 2.3.1**: Updated fsched command.
 
 <br>
 
