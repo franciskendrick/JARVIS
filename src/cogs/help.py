@@ -10,7 +10,7 @@ async def autocomplete_commands(inter: disnake.AppCmdInter, user_input: str):
         commands.append(cmd.name)
 
     return [cmd for cmd in commands if user_input.lower() in cmd.lower()][:25]
-    
+
 
 class Help(commands.Cog):
     def __init__(self, bot):

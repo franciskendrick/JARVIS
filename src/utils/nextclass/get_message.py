@@ -7,22 +7,14 @@ from ..format_time import round_time
 from .get_title import get_classstarted_title
 from .get_title import get_classnotstarted_title
 import disnake
-import os
 
-resources_path = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__), 
-        "..", "..", "..", "resources"
-        )
-    )
-
-# Schedule and Links
-full_schedule = get_synchronous_schedule()
+# Schedules and Links
+sync_full_schedule = get_synchronous_schedule()
 links = get_links()
 
 
 def get_nextclass_title(current_time):
-    for schedule in full_schedule.values():
+    for schedule in sync_full_schedule.values():
         for time in schedule.keys():
             # Get start time and end time
             start_time, end_time = time.split(" - ")
@@ -69,7 +61,7 @@ def get_nextclass_embed(title, day, time):
         title=title, color=disnake.Color.from_rgb(*Colors.pink))
 
     # Get subject and link
-    subject = full_schedule[day][time]
+    subject = sync_full_schedule[day][time]
     link = links[subject]
 
     # Times

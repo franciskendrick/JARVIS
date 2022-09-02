@@ -26,8 +26,7 @@ def round_time(time):
     date = datetime.date.today()
 
     # Get time
-    split_time = time.split(":")
-    time = f"{split_time[0]}:{split_time[1]}:00"
+    time = f"{time[:-3]}:00"
     time = convert_timestr_to_datetime(time)
 
     # Return

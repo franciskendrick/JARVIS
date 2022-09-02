@@ -1,6 +1,8 @@
 from utils import round_time
 from utils import get_restday_message
 from utils import get_schedule_embed
+from utils.schedule import get_day
+from utils.schedule import get_learningtype
 from utils import get_nextclass_title
 from utils import get_nextclass_embed
 from disnake.ext import commands
@@ -26,13 +28,9 @@ class School(commands.Cog):
 
         # Days
         self.days = {
-            "synchronous": ["Monday", "Wednesday", "Friday"],
-            "asynchronous": ["Tuesday", "Thursday", "Saturday"]
+            "online": ["Monday", "Wednesday", "Friday"],
+            "face-to-face": ["Tuesday", "Thursday"]
         }
-
-        # Aliases
-        with open(f"{resources_path}/aliases.json") as json_file:
-            self.aliases = json.load(json_file)
 
         # Responses
         with open(f"{resources_path}/responses.json") as json_file:
@@ -45,11 +43,15 @@ class School(commands.Cog):
     # Normal command/s
     @commands.command(
         name="sched", 
-        usage="<given_day>",
+        usage="<day> <learning_type>",
         description="Shows your schedule for today or for your given day.",
-        help="`<given_day>`: The day of the schedule you want to see. (`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)")
-    async def sched(self, ctx, given_day=None):
-        await self.handle_sched(ctx, given_day)
+        help="""
+            `<day>`: The day of the schedule you want to see. (`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)
+            `<learning_type>`: The learning type of the schedule you want to see. (`synchronous` / `asynchronous` / `all`)
+        """
+    )
+    async def sched(self, ctx, day=None, learning_type=None):
+        await self.handle_sched(ctx, day, learning_type)
 
     @commands.command(
         name="fsched",
@@ -68,7 +70,7 @@ class School(commands.Cog):
     async def _sched(
         self,
         inter: disnake.AppCmdInter,
-        given_day: str = commands.Param(
+        day: str = commands.Param(
             default=None, 
             choices=[
                 "sunday", 
@@ -79,6 +81,14 @@ class School(commands.Cog):
                 "friday", 
                 "saturday"
             ]
+        ),
+        learning_type: str = commands.Param(
+            default=None,
+            choices=[
+                "synchronous",
+                "asynchronous",
+                "all"
+            ]
         )
     ):
         """
@@ -86,10 +96,11 @@ class School(commands.Cog):
 
         Parameters
         ----------
-        given_day: The day of the schedule you want to see.
+        day: The day of the schedule you want to see.
+        learning_type: The learning type of the schedule you want to see.
         """
 
-        await self.handle_sched(inter, given_day)
+        await self.handle_sched(inter, day, learning_type)
 
     @commands.slash_command(name="fsched")
     async def _fsched(self, inter: disnake.AppCmdInter):
@@ -108,41 +119,32 @@ class School(commands.Cog):
         await self.handle_next(inter)
 
     # Handle command/s
-    async def handle_sched(self, ctx, given_day):
-        # Get day
-        if given_day == None:  # no argument given
-            with_input = False
-
-            # Get current day
-            timezone_manila = pytz.timezone("Asia/Manila")
-            day = datetime.datetime.now(timezone_manila).strftime("%A")
-        else:  # has an argument
-            with_input = True
-
-            # Get day
-            day = None
-            for key, aliases in self.aliases.items():
-                if given_day.lower() in aliases:
-                    day = key
-                    break
+    async def handle_sched(self, ctx, given_day, given_learningtype):
+        # Get variables
+        day, with_input = get_day(given_day)
+        learning_type = get_learningtype(given_learningtype )
 
         # Give schedule
-        if day != None:  # give schedule
-            if day in self.days["synchronous"]:
-                embed = get_schedule_embed(day)
-                await ctx.send(embed=embed)
-            else:
+        if day != None:  # get schedule
+            if day in self.days["online"]:  # give schedule
+                if learning_type == "all":  # give all schedules
+                    for new_learningtype in ["synchronous", "asynchronous"]:
+                        embed = get_schedule_embed(day, new_learningtype)
+                        await ctx.send(embed=embed)
+                else:  # give a/synchronous schedule
+                    embed = get_schedule_embed(day, learning_type)
+                    await ctx.send(embed=embed)
+            else:  # give rest day message
                 input_type = "with_input" if with_input else "no_input"
                 message = get_restday_message(ctx, day, input_type)
                 await ctx.send(message)
-        else:  # give schedule
+        else:  # give error
             message = random.choice(self.errors["WrongArgumentGiven"])
             message = message.replace("__user__", f"<@{ctx.author.id}>")
-
             await ctx.send(message)
 
     async def handle_fsched(self, ctx):
-        for day in self.days["synchronous"]:
+        for day in self.days["online"]:
             embed = get_schedule_embed(day)
             await ctx.send(embed=embed)
 
@@ -155,7 +157,7 @@ class School(commands.Cog):
         current_time = round_time(now.strftime("%H:%M:%S"))
 
         # Give next class
-        if current_day in self.days["synchronous"]:
+        if current_day in self.days["online"]:
             title, time = get_nextclass_title(current_time)
             if (title, time) != (None, None):  # class hasn't ended, hence, there's a class next
                 embed = get_nextclass_embed(title, current_day, time)
