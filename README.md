@@ -1,7 +1,5 @@
 # **JARVIS**
-**Version: 2.2.1**:
-- Fixed some bugs.
-- Added next slash command's description.
+**Version: 2.3.0**: Added sched command's learning type variable
 
 <br>
 

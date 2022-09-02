@@ -29,7 +29,7 @@ def get_day(given_day):
 
         # Get day
         day = None
-        for key, aliases in all_aliases.items():
+        for key, aliases in all_aliases["day"].items():
             if given_day.lower() in aliases:
                 day = key
                 break
@@ -37,8 +37,8 @@ def get_day(given_day):
     return day, with_input
 
 
-def get_learningtype(given_learning_type):
-    if given_learning_type == None:
+def get_learningtype(given_learningtype):
+    if given_learningtype == None:
         tz_manila = pytz.timezone("Asia/Manila")
         now = datetime.datetime.now(tz_manila)
         current_time = round_time(now.strftime("%H:%M:%S"))
@@ -85,4 +85,13 @@ def get_learningtype(given_learning_type):
 
         return learning_type
     else:
-        return given_learning_type
+        # Get learning type
+        if given_learningtype == "all":
+            learning_type = given_learningtype
+        else:
+            for key, aliases in all_aliases["learning_type"].items():
+                if given_learningtype.lower() in aliases:
+                    learning_type = key
+                    break
+
+    return learning_type

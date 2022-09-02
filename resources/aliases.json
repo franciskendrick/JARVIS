@@ -1,9 +1,15 @@
 {
-    "Sunday": ["sunday", "sun", "sn"],
-    "Monday": ["monday", "mon", "m"],
-    "Tuesday": ["tuesday", "tues", "tue", "t"],
-    "Wednesday": ["wednesday", "wed", "w"],
-    "Thursday": ["thursday", "thurs", "thur", "th"],
-    "Friday": ["friday", "fri", "f"],
-    "Saturday": ["saturday", "sat", "s"]
+    "day": {
+        "Sunday": ["sunday", "sun", "sn"],
+        "Monday": ["monday", "mon", "m"],
+        "Tuesday": ["tuesday", "tues", "tue", "t"],
+        "Wednesday": ["wednesday", "wed", "w"],
+        "Thursday": ["thursday", "thurs", "thur", "th"],
+        "Friday": ["friday", "fri", "f"],
+        "Saturday": ["saturday", "sat", "s"]
+    },
+    "learning_type": {
+        "synchronous": ["synchronous", "sync"],
+        "asynchronous": ["asynchronous", "async"]
+    }
 }
