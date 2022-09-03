@@ -1,6 +1,6 @@
 from ..colors import Colors
 from ..get_env import get_synchronous_schedule
-from ..get_env import get_links
+from ..get_env import get_classlinks
 from ..format_time import formattime_to_twelevehour
 from ..format_time import convert_timestr_to_datetime
 from ..format_time import round_time
@@ -10,7 +10,7 @@ import disnake
 
 # Schedules and Links
 sync_full_schedule = get_synchronous_schedule()
-links = get_links()
+links = get_classlinks()
 
 
 def get_nextclass_title(current_time):

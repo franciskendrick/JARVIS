@@ -82,10 +82,9 @@ def get_learningtype(given_learningtype):
             learning_type = "asynchronous"
         elif passed_asynctime:  # all (classes are finished)
             learning_type = "all"
-
-        return learning_type
     else:
         # Get learning type
+        learning_type = None
         if given_learningtype == "all":
             learning_type = given_learningtype
         else:

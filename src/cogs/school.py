@@ -67,6 +67,10 @@ class School(commands.Cog):
     async def _next(self, ctx):
         await self.handle_next(ctx)
 
+    @commands.command()
+    async def club(self, ctx, club_name=None):
+        await self.handle_club(ctx, club_name)
+
     # Slash command/s
     @commands.slash_command(name="sched")
     async def _sched(
@@ -135,6 +139,25 @@ class School(commands.Cog):
         
         await self.handle_next(inter)
 
+    @commands.slash_command(name="club")
+    async def club(
+        self, 
+        inter: disnake.AppCmdInter,
+        club_name: str = commands.Param(
+            default=None,
+            choices=[
+                "performing arts",
+                "multimedia arts and crafts",
+                "culinary",
+                "journalism",
+                "varsity",
+                "racc",
+                "student government"
+            ]
+        )
+    ):
+        await self.handle_club(inter, club_name)
+
     # Handle command/s
     async def handle_sched(self, ctx, given_day, given_learningtype):
         # Get variables
@@ -191,6 +214,9 @@ class School(commands.Cog):
         else:
             message = get_restday_message(ctx, current_day, "no_input")
             await ctx.send(message)
+
+    async def handle_club(self, ctx, given_clubname):
+        pass
 
 
 # Setup

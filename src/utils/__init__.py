@@ -18,6 +18,7 @@ from .nextclass import get_nextclass_title
 from .nextclass import get_nextclass_embed
 
 # Get env module/s
-from .get_env import get_links
 from .get_env import get_synchronous_schedule
 from .get_env import get_asynchronous_schedule
+from .get_env import get_classlinks
+from .get_env import get_clublinks
