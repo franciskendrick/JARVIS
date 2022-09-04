@@ -1,5 +1,4 @@
-from ..format_time import convert_timestr_to_datetime
-from ..format_time import round_time
+from ..format_time import convert_timestr_to_datetime, round_time
 import datetime
 import pytz
 import json
