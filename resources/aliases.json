@@ -11,5 +11,10 @@
     "learning_type": {
         "synchronous": ["synchronous", "sync"],
         "asynchronous": ["asynchronous", "async"]
+    },
+    "club_name": {
+        "Performing Arts": ["pa"],
+        "Multimedia - Arts and Crafts": ["mac"],
+        "Student Government": ["sg"]
     }
 }

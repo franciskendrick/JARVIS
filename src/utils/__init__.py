@@ -17,6 +17,9 @@ from .schedule import get_schedule_embed
 from .nextclass import get_nextclass_title
 from .nextclass import get_nextclass_embed
 
+# Club links module/s
+from .clublinks import get_clublinks_embed
+
 # Get env module/s
 from .get_env import get_synchronous_schedule
 from .get_env import get_asynchronous_schedule

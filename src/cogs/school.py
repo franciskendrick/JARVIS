@@ -5,6 +5,7 @@ from utils.schedule import get_day
 from utils.schedule import get_learningtype
 from utils import get_nextclass_title
 from utils import get_nextclass_embed
+from utils import get_clublinks_embed
 from disnake.ext import commands
 import disnake
 import datetime
@@ -46,8 +47,8 @@ class School(commands.Cog):
         usage="<day> <learning_type>",
         description="Shows your schedule for today or for your given day.",
         help="""
-            `<day>`: The day of the schedule you want to see. *(`sunday` / `monday` / `tuesday` / `wednesday` / `thursday` / `friday` / `saturday`)*
-            `<learning_type>`: The learning type of the schedule you want to see. *(`synchronous` / `asynchronous` / `all`)*
+            `<day>`: The day of the schedule you want to see. *(`sunday`/`monday`/`tuesday`/`wednesday`/`thursday`/`friday`/`saturday`)*
+            `<learning_type>`: The learning type of the schedule you want to see. *(`synchronous`/`asynchronous`/`all`)*
         """
     )
     async def sched(self, ctx, day=None, learning_type=None):
@@ -55,6 +56,7 @@ class School(commands.Cog):
 
     @commands.command(
         name="fsched",
+        usage="<learning_type>",
         description="Shows your full schedule.",
         help="`<learning_type>`: The learning type of the full schedule you want to see. *(`synchronous` / `asynchronous` / `all`)*"
     )
@@ -67,8 +69,13 @@ class School(commands.Cog):
     async def _next(self, ctx):
         await self.handle_next(ctx)
 
-    @commands.command()
-    async def club(self, ctx, club_name=None):
+    @commands.command(
+        name="club",
+        usage="<club_name>",
+        description="Shows club links.",
+        help="`<club_name>`: The name of the club (or an abbriviation of it) you want the link of."
+    )
+    async def _club(self, ctx, club_name=None):
         await self.handle_club(ctx, club_name)
 
     # Slash command/s
@@ -140,14 +147,14 @@ class School(commands.Cog):
         await self.handle_next(inter)
 
     @commands.slash_command(name="club")
-    async def club(
+    async def s_club(
         self, 
         inter: disnake.AppCmdInter,
         club_name: str = commands.Param(
             default=None,
             choices=[
                 "performing arts",
-                "multimedia arts and crafts",
+                "multimedia - arts and crafts",
                 "culinary",
                 "journalism",
                 "varsity",
@@ -156,6 +163,13 @@ class School(commands.Cog):
             ]
         )
     ):
+        """
+        Shows club links.
+
+        Parameters
+        ----------
+        club_name: The name of the club (or an abbriviation of it) you want the link of.
+        """
         await self.handle_club(inter, club_name)
 
     # Handle command/s
@@ -216,7 +230,8 @@ class School(commands.Cog):
             await ctx.send(message)
 
     async def handle_club(self, ctx, given_clubname):
-        pass
+        embed = get_clublinks_embed(given_clubname)
+        await ctx.send(embed=embed)
 
 
 # Setup

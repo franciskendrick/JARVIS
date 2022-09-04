@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.3.1**: Updated fsched command.
+**Version: 2.4.0**: Added school's club command.
 
 <br>
 
