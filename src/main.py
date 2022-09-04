@@ -10,7 +10,8 @@ if __name__ == "__main__":
         help_command=None,
         intents=disnake.Intents.all())
     
-    TOKEN = os.environ["TOKEN"]
+    # TOKEN = os.environ["TOKEN"]
+    TOKEN = "ODgyNDk3ODE5MDMyODI1ODY2.GFOCFM.unnq5YyMUCEBscXAzmS7kkN9chUqKH8eZtcIf8"
 
     # Path
     path = os.path.dirname(__file__)

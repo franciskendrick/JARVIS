@@ -1,2 +1,1 @@
-from .get_message import get_nextclass_title
-from .get_message import get_nextclass_embed
+from .get_message import get_nextclass_title, get_nextclass_embed

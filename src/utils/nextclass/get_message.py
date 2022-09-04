@@ -1,11 +1,7 @@
 from ..colors import Colors
-from ..get_env import get_synchronous_schedule
-from ..get_env import get_classlinks
-from ..format_time import formattime_to_twelevehour
-from ..format_time import convert_timestr_to_datetime
-from ..format_time import round_time
-from .get_title import get_classstarted_title
-from .get_title import get_classnotstarted_title
+from ..get_env import get_synchronous_schedule, get_classlinks
+from ..format_time import formattime_to_twelevehour, convert_timestr_to_datetime, round_time
+from .get_title import get_classstarted_title, get_classnotstarted_title
 import disnake
 
 # Schedules and Links

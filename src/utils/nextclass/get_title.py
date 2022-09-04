@@ -1,6 +1,5 @@
 from ..format_time import convert_timestr_to_datetime 
-from .get_timeleft import get_hoursleft
-from .get_timeleft import get_minutesleft
+from .get_timeleft import get_hoursleft, get_minutesleft
 
 
 def get_classstarted_title(current_time, start_time):

@@ -1,7 +1,5 @@
 # **JARVIS**
-**Version: 2.4.1**: 
-- Adapted PEP 8 imports.
-- Reset bot token.
+**Version: 2.4.1**: Adapted PEP 8 imports.
 
 <br>
 
