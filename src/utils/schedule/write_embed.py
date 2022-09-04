@@ -1,6 +1,4 @@
-from ..get_env import get_synchronous_schedule
-from ..get_env import get_asynchronous_schedule
-from ..get_env import get_classlinks
+from ..get_env import get_synchronous_schedule, get_asynchronous_schedule, get_classlinks
 from ..format_time import formattime_to_twelevehour
 import disnake
 

@@ -1,8 +1,6 @@
 from ..colors import Colors
-from ..get_env import get_synchronous_schedule
-from ..get_env import get_asynchronous_schedule
-from .write_embed import write_syncsched
-from .write_embed import write_asyncsched
+from ..get_env import get_synchronous_schedule, get_asynchronous_schedule
+from .write_embed import write_syncsched, write_asyncsched
 
 # Schedules
 sync_full_schedule = get_synchronous_schedule()

@@ -1,11 +1,8 @@
-from utils import round_time
 from utils import get_restday_message
-from utils import get_schedule_embed
-from utils.schedule import get_day
-from utils.schedule import get_learningtype
-from utils import get_nextclass_title
-from utils import get_nextclass_embed
-from utils import get_clublinks_embed
+from utils import round_time  # format time module/s
+from utils.schedule import get_schedule_embed, get_day, get_learningtype  # schedule module/s
+from utils import get_nextclass_title, get_nextclass_embed  # next class module/s
+from utils import get_clublinks_embed  # club links module/s
 from disnake.ext import commands
 import disnake
 import datetime

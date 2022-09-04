@@ -1,5 +1,4 @@
-from utils import get_fullhelp_embed
-from utils import get_commandinfo_embed
+from utils import get_fullhelp_embed, get_commandinfo_embed  # help module/s
 from disnake.ext import commands
 import disnake
 

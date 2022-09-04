@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.4.0**: Added school's club command.
+**Version: 2.4.1**: Adapted PEP 8 imports.
 
 <br>
 
