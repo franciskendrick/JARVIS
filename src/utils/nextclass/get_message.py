@@ -1,6 +1,6 @@
 from ..colors import Colors
 from ..get_env import get_synchronous_schedule, get_classlinks
-from ..format_time import formattime_to_twelevehour, convert_timestr_to_datetime, round_time
+from ..format_time import formattime_to_twelvehour, convert_timestr_to_datetime, round_time
 from .get_title import get_classstarted_title, get_classnotstarted_title
 import disnake
 
@@ -62,8 +62,8 @@ def get_nextclass_embed(title, day, time):
 
     # Times
     start_time, end_time = time.split(" - ")
-    start_time = formattime_to_twelevehour(start_time)
-    end_time = formattime_to_twelevehour(end_time)
+    start_time = formattime_to_twelvehour(start_time)
+    end_time = formattime_to_twelvehour(end_time)
     time_limit = f"{start_time} - {end_time}"
 
     # Add Field

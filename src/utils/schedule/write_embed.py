@@ -1,5 +1,5 @@
 from ..get_env import get_synchronous_schedule, get_asynchronous_schedule, get_classlinks
-from ..format_time import formattime_to_twelevehour
+from ..format_time import formattime_to_twelvehour
 import disnake
 
 # Schedule and Links
@@ -23,8 +23,8 @@ def write_syncsched(day, color):
         
         # Get time
         start_time, end_time = time.split(" - ")
-        start_time = formattime_to_twelevehour(start_time)
-        end_time = formattime_to_twelevehour(end_time)
+        start_time = formattime_to_twelvehour(start_time)
+        end_time = formattime_to_twelvehour(end_time)
 
         time = f"{start_time} - {end_time}"
 
@@ -52,8 +52,8 @@ def write_asyncsched(day, color):
 
         # Get time
         start_time, end_time = time.split(" - ")
-        start_time = formattime_to_twelevehour(start_time)
-        end_time = formattime_to_twelevehour(end_time)
+        start_time = formattime_to_twelvehour(start_time)
+        end_time = formattime_to_twelvehour(end_time)
 
         time = f"{start_time} - {end_time}"
 

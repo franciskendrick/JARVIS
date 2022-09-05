@@ -9,8 +9,8 @@
         "Saturday": ["saturday", "sat", "s"]
     },
     "learning_type": {
-        "synchronous": ["synchronous", "sync"],
-        "asynchronous": ["asynchronous", "async"]
+        "synchronous": ["s", "synchronous", "sync"],
+        "asynchronous": ["a", "asynchronous", "async"]
     },
     "club_name": {
         "Performing Arts": ["pa"],

@@ -1,19 +1,19 @@
 import datetime
 
 
-def formattime_to_twelevehour(time):
-    # Convert time into a datetime object
-    time = datetime.datetime.strptime(time, "%H:%M:%S")
-
-    # Get tweleve hour time format
-    time = time.time()
-    twelvehour_format = time.strftime("%I:%M")
+def formattime_to_twelvehour(time):
+    # Get hours and minutes
+    hours, minutes, _ = time.split(":")
+    hours, minutes = int(hours), int(minutes)
 
     # Get meridian
-    meridian = "PM" if time.hour >= 12 else "AM"
+    meridian = "PM"
+    if hours > 12:
+        meridian = "AM"
+        hours -= 12
 
     # Return
-    return f"{twelvehour_format} {meridian}"
+    return ("%02d:%02d " + meridian) % (hours, minutes)
 
 
 def convert_timestr_to_datetime(time):

@@ -1,5 +1,8 @@
 # **JARVIS**
-**Version: 2.4.1**: Adapted PEP 8 imports.
+**Version: 2.4.2**: 
+- Fixed a bug in fsched command.
+- Adapted PEP 8 imports for those I missed last version.
+- Updated format time's format time to twelve hour module.
 
 <br>
 
