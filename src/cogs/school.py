@@ -42,7 +42,7 @@ class School(commands.Cog):
     @commands.command(
         name="sched", 
         usage="<day> <learning_type>",
-        description="Shows your schedule for today or for your given day.",
+        description="Shows your online classes schedule for today or for your given day.",
         help="""
             `<day>`: The day of the schedule you want to see. *(`sunday`/`monday`/`tuesday`/`wednesday`/`thursday`/`friday`/`saturday`)*
             `<learning_type>`: The learning type of the schedule you want to see. *(`synchronous`/`asynchronous`/`all`)*
@@ -75,6 +75,15 @@ class School(commands.Cog):
     async def _club(self, ctx, club_name=None):
         await self.handle_club(ctx, club_name)
 
+    @commands.command(
+        name="f2f",
+        usage="<section>",
+        description="Shows your face-to-face classes schedule for today or for your given day.",
+        help="`<section>`: Your section in your face-to-face classes."
+    )
+    async def f2f(self, ctx, section=None):
+        await self.handle_f2f(ctx, section)
+
     # Slash command/s
     @commands.slash_command(name="sched")
     async def _sched(
@@ -102,7 +111,7 @@ class School(commands.Cog):
         )
     ):
         """
-        Shows your schedule for today or for your given day.
+        Shows your online class schedule for today or for your given day.
 
         Parameters
         ----------
@@ -126,7 +135,7 @@ class School(commands.Cog):
         )
     ):
         """
-        Shows your full schedule.
+        Shows your full online class schedule.
 
         Parameters
         ----------
@@ -138,7 +147,7 @@ class School(commands.Cog):
     @commands.slash_command(name="next")
     async def s_next(self, inter: disnake.AppCmdInter):
         """
-        Shows the next class you will be attending.
+        Shows the next class *(online or face-to-face)* you will be attending.
         """
         
         await self.handle_next(inter)
@@ -168,6 +177,28 @@ class School(commands.Cog):
         club_name: The name of the club (or an abbriviation of it) you want the link of.
         """
         await self.handle_club(inter, club_name)
+
+    @commands.slash_command(name="f2f")
+    async def _f2f(
+        self, 
+        inter: disnake.AppCmdInter,
+        section: str = commands.Param(
+            default=None,
+            choices=[
+                "einstein",
+                "newton",
+                "maxwell"
+            ]
+        )
+    ):
+        """
+        Shows your face-to-face classes schedule for today or for your given day.
+
+        Parameters
+        ----------
+        section: Your section in your face-to-face classes.
+        """
+        await self.handle_f2f(inter, section)
 
     # Handle command/s
     async def handle_sched(self, ctx, given_day, given_learningtype):
@@ -231,6 +262,9 @@ class School(commands.Cog):
     async def handle_club(self, ctx, given_clubname):
         embed = get_clublinks_embed(given_clubname)
         await ctx.send(embed=embed)
+
+    async def handle_f2f(self, ctx, section):
+        pass
 
 
 # Setup
