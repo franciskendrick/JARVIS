@@ -38,6 +38,9 @@ def get_day(given_day):
 
 def get_learningtype(given_learningtype):
     if given_learningtype == None:
+        with_input = False
+
+        # Get current time
         tz_manila = pytz.timezone("Asia/Manila")
         now = datetime.datetime.now(tz_manila)
         current_time = round_time(now.strftime("%H:%M:%S"))
@@ -82,6 +85,8 @@ def get_learningtype(given_learningtype):
         elif passed_asynctime:  # all (classes are finished)
             learning_type = "all"
     else:
+        with_input = True
+
         # Get learning type
         learning_type = None
         if given_learningtype == "all":
@@ -92,4 +97,4 @@ def get_learningtype(given_learningtype):
                     learning_type = key
                     break
 
-    return learning_type
+    return learning_type, with_input

@@ -1,7 +1,5 @@
 # **JARVIS**
-**Version: 2.4.3**: 
-- Fixed a bug in *format time to twelve hour* module.
-- Fixed a bug in school's sched command.
+**Version: 2.4.4**: Fixed a bug in school's sched command.
 
 <br>
 

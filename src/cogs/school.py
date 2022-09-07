@@ -172,13 +172,13 @@ class School(commands.Cog):
     # Handle command/s
     async def handle_sched(self, ctx, given_day, given_learningtype):
         # Get variables
-        day, with_input = get_day(given_day)
-        learning_type = get_learningtype(given_learningtype)
+        day, with_day_input = get_day(given_day)
+        learning_type, with_lt_input = get_learningtype(given_learningtype)
 
         # Give schedule
         if day != None and learning_type != None:  # get schedule
             if day in self.days["online"]:  # give schedule
-                if learning_type == "all" or with_input:  # give all schedules
+                if learning_type == "all" or (with_day_input and not with_lt_input):  # give all schedules
                     for new_learningtype in ["synchronous", "asynchronous"]:
                         embed = get_schedule_embed(day, new_learningtype)
                         await ctx.send(embed=embed)
@@ -186,7 +186,7 @@ class School(commands.Cog):
                     embed = get_schedule_embed(day, learning_type)
                     await ctx.send(embed=embed)
             else:  # give rest day message
-                input_type = "with_input" if with_input else "no_input"
+                input_type = "with_input" if with_day_input else "no_input"
                 message = get_restday_message(ctx, day, input_type)
                 await ctx.send(message)
         else:  # give error
