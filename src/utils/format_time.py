@@ -7,9 +7,9 @@ def formattime_to_twelvehour(time):
     hours, minutes = int(hours), int(minutes)
 
     # Get meridian
-    meridian = "PM"
+    meridian = "AM"
     if hours > 12:
-        meridian = "AM"
+        meridian = "PM"
         hours -= 12
 
     # Return

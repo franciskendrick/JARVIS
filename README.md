@@ -1,8 +1,7 @@
 # **JARVIS**
-**Version: 2.4.2**: 
-- Fixed a bug in fsched command.
-- Adapted PEP 8 imports for those I missed last version.
-- Updated format time's format time to twelve hour module.
+**Version: 2.4.3**: 
+- Fixed a bug in *format time to twelve hour* module.
+- Fixed a bug in school's sched command.
 
 <br>
 

@@ -60,7 +60,7 @@ def write_asyncsched(day, color):
         # Add field
         value = "*Do* `~club` *to get your club link/s.*" if subject == "Club Meeting" else "** **"
         embed.add_field(
-            name=f"__{subject}__: **{time}**",
+            name=f"__{subject}__: {time}",
             value=value,
             inline=False)
 

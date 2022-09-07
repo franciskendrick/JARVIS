@@ -178,7 +178,7 @@ class School(commands.Cog):
         # Give schedule
         if day != None and learning_type != None:  # get schedule
             if day in self.days["online"]:  # give schedule
-                if learning_type == "all":  # give all schedules
+                if learning_type == "all" or with_input:  # give all schedules
                     for new_learningtype in ["synchronous", "asynchronous"]:
                         embed = get_schedule_embed(day, new_learningtype)
                         await ctx.send(embed=embed)
