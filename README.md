@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.4.4**: Fixed a bug in school's sched command.
+**Version: 2.4.5**: Added a command not found error on help command.
 
 <br>
 
