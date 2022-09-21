@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.4.5**: Added a command not found error on help command.
+**Version: 2.4.6**: Fixed an fsched command bug.
 
 <br>
 

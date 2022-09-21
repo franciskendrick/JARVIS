@@ -232,7 +232,7 @@ class School(commands.Cog):
                     embed = get_schedule_embed(day, learning_type)
                     await ctx.send(embed=embed)
             else:  # give a/synchronous schedule
-                learning_type = get_learningtype(given_learningtype)
+                learning_type, _ = get_learningtype(given_learningtype)
 
                 embed = get_schedule_embed(day, learning_type)
                 await ctx.send(embed=embed)

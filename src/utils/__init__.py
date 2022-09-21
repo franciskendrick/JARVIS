@@ -25,5 +25,3 @@ from .get_env import get_synchronous_schedule
 from .get_env import get_asynchronous_schedule
 from .get_env import get_classlinks
 from .get_env import get_clublinks
-from .get_env import get_f2fclass_schedule
-from .get_env import get_f2fasync_schedule

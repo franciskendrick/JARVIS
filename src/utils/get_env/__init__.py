@@ -2,5 +2,3 @@ from .get_syncsched import get_synchronous_schedule
 from .get_asyncsched import get_asynchronous_schedule
 from .get_classlinks import get_classlinks
 from .get_clublinks import get_clublinks
-from .get_f2fclass_sched import get_f2fclass_schedule
-from .get_f2fasync_sched import get_f2fasync_schedule
