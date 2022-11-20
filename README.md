@@ -1,5 +1,5 @@
 # **JARVIS**
-**Version: 2.4.6**: Fixed an fsched command bug.
+**Version: 2.4.7**: Updated schedule.
 
 <br>
 

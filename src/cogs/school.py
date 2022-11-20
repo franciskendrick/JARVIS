@@ -26,8 +26,8 @@ class School(commands.Cog):
 
         # Days
         self.days = {
-            "online": ["Monday", "Wednesday", "Friday"],
-            "face-to-face": ["Tuesday", "Thursday"]
+            "online": ["Monday", "Friday"],
+            "face-to-face": ["Tuesday", "Wednesday", "Thursday"]
         }
 
         # Responses

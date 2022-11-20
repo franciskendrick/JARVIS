@@ -9,7 +9,6 @@ async_full_schedule = get_asynchronous_schedule()
 # Embed colors
 embed_colors = {
     "Monday": Colors.red,
-    "Wednesday": Colors.yellow,
     "Friday": Colors.green
 }
 

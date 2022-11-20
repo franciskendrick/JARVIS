@@ -19,7 +19,7 @@ def write_syncsched(day, color):
     for time in sched:
         # Get subject and link
         subject = sched[time]
-        link = links[subject]
+        link = "*Do* `~club` *to get your club link/s.*" if subject == "Club Meeting" else links[subject]
         
         # Get time
         start_time, end_time = time.split(" - ")
